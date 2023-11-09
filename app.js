@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const globalErrorhandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
@@ -23,6 +24,11 @@ app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 //GLOBAL MIDDLEWARE
+//Cors
+app.use(cors());
+
+app.options('*', cors());
+// app.options('/api/v1/tours/:id')
 
 //Serving statis files
 app.use(express.static(path.join(__dirname, 'public')));
